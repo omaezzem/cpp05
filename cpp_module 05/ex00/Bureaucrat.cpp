@@ -1,0 +1,46 @@
+#include "Bureaucrat.hpp"
+
+Bureaucrat::Bureaucrat() : name("x"), grade(70)
+{
+    if (grade > 150)
+        throw Bureaucrat::GradeTooLowException();
+    else if (grade < 1)
+        throw Bureaucrat::GradeTooHightException();
+}
+
+Bureaucrat::~Bureaucrat() {}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &exist) : name(exist.name) , grade(exist.grade) {}
+
+Bureaucrat::Bureaucrat(std::string const name, int grade) : name(name), grade(grade)
+{
+    if (grade > 150)
+        throw Bureaucrat::GradeTooLowException();
+    else if (grade < 1)
+        throw Bureaucrat::GradeTooHightException();
+}
+
+std::string const Bureaucrat::get_name() { return (name); }
+
+int Bureaucrat::get_grade() { return (grade); }
+
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &exist)
+{
+    if (this != &exist)
+        grade = exist.grade;
+    return *this;
+}
+
+void    Bureaucrat::decrementgrade()
+{
+    if ((grade + 1) > 150)
+        throw GradeTooLowException();
+    grade++;
+}
+
+void    Bureaucrat::incrementgrade()
+{
+    if ((grade - 1) < 1)
+        throw GradeTooHightException();
+    grade--;
+}
